@@ -1,0 +1,30 @@
+<div class="sidebar">
+    <div class="tab-content h-100" role="tablist">
+        <div class="tab-pane fade h-100 show active" id="tab-content-dialogs" role="tabpanel">
+            <div class="d-flex flex-column h-100">
+                <div class="hide-scrollbar">
+                    <div class="container-fluid py-6">
+                        <!-- Title -->
+                        <h2 class="font-bold mb-6">Chats</h2>
+                        <!-- Title -->
+                        <!-- Search -->
+                        <form class="mb-6">
+                            <div class="input-group">
+                                <input type="text" class="form-control form-control-lg"
+                                    placeholder="Search for messages or users..."
+                                    aria-label="Search for messages or users...">
+                                <div class="input-group-append">
+                                    <button class="btn btn-lg btn-ico btn-secondary btn-minimal" type="submit">
+                                        <i class="fe-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                        <!-- Search -->
+                        <app-list-message></app-list-message>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
