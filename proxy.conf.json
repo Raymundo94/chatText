@@ -1,0 +1,10 @@
+{
+    "/users": {
+      "target": "http://34.216.104.187:8080",
+      "secure": false
+    },
+    "/messages": {
+      "target": "http://34.216.104.187:8080",
+      "secure": false
+    }
+  }

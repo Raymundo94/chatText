@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-list-message',
@@ -7,9 +9,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListMessageComponent implements OnInit {
 
-  constructor() { }
+  private subscription = new Subscription();
+
+  constructor(private data: DataService) { }
 
   ngOnInit(): void {
+    this.getChatActive();
   }
+  //Get chat active
+  getChatActive() {
+    const activeChats = this.data.chatActive$.subscribe(resp => {
+      console.log(resp);
+    }, error => {
+      console.log(error);
+    })
+    this.subscription.add(activeChats);
+  }
+
+  //Close all
+  ngOnDestroy(): void {
+    //delete subscriptions
+    this.subscription.unsubscribe();
+  }
+
+
 
 }
