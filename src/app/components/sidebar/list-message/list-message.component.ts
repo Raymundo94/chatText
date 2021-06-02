@@ -10,6 +10,8 @@ import { DataService } from 'src/app/services/data.service';
 export class ListMessageComponent implements OnInit {
 
   private subscription = new Subscription();
+  users: any;
+  count: any;
 
   constructor(private data: DataService) { }
 
@@ -17,14 +19,36 @@ export class ListMessageComponent implements OnInit {
     this.getChatActive();
   }
   //Get chat active
-  getChatActive() {
+  getChatActive():void {
     const activeChats = this.data.chatActive$.subscribe(resp => {
-      console.log(resp);
+      this.users = resp;
+      this.getCountMessage();
     }, error => {
       console.log(error);
     })
     this.subscription.add(activeChats);
   }
+  //get number of messages
+  getCountMessage():void {
+    const countChats = this.data.countChat$.subscribe(resp => {
+      this.count = resp;
+      this.count.forEach((count:any) => {
+          this.users.forEach((user:any) => {
+            if(count.userId === user.id ){
+              user.count = count.totalUnread
+            }
+          });
+      });
+      console.log("**********************");
+      console.log(this.users);
+
+    }, error => {
+      console.log(error);
+    })
+    this.subscription.add(countChats);
+  }
+
+
 
   //Close all
   ngOnDestroy(): void {

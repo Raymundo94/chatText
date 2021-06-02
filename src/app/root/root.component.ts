@@ -19,19 +19,17 @@ export class RootComponent {
 
   ngOnInit() {
     this.getChatsActive();
-    this.getInfoChat();
   }
 
   //Get chats active
   getChatsActive(): void {
     const getActive = this.chats.getUsersChat().subscribe(resp => {
-      console.log(resp);
-      //  this.data.chatActive$.emit(resp);
+      this.data.chatActive$.emit(resp);
+      this.getCount();
     }, error => {
       //put error in console for test
       console.log(error);
     });
-
     this.subscription.add(getActive);
   }
 
@@ -52,5 +50,21 @@ export class RootComponent {
     this.subscription.unsubscribe();
   }
 
-
+  //get number of messages
+  getCount(): void {
+    this.getNumberInfo();
+    setTimeout(() => {
+      this.getNumberInfo();
+    }, 60000);
+  }
+  
+  //get service count messages
+  getNumberInfo(): void {
+    const getCount = this.chats.getCountMessage().subscribe(resp => {
+      this.data.countChat$.emit(resp);
+      getCount.unsubscribe();
+    }, error => {
+      console.log(error);
+    })
+  }
 }

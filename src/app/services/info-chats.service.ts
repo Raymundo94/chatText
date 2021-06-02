@@ -3,7 +3,6 @@ import { environment } from 'src/environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -14,7 +13,7 @@ export class InfoChatsService {
   //Get chats actives
   getUsersChat(): Observable<any> {
     const headers = new HttpHeaders({
-      'x-token': '9e397d60-be44-11eb-8529-0242ac130003'
+      'x-token': environment.apiKey
     });
     const url = '/users/connected';
     return this.httpClient.get(url, { headers });
@@ -26,6 +25,15 @@ export class InfoChatsService {
       'x-token': environment.apiKey,
     });
     const url = `/messages/${id}`;
+    return this.httpClient.get(url, { headers });
+  }
+
+  //Get count message for user
+  getCountMessage(): Observable<any>{
+    const headers = new HttpHeaders({
+      'x-token': environment.apiKey,
+    });
+    const url = `/messages/status`;
     return this.httpClient.get(url, { headers });
   }
 }

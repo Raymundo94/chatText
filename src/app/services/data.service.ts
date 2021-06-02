@@ -7,6 +7,7 @@ export class DataService {
   //Data pass for diferents componenets
   chatActive$ = new EventEmitter();
   chatInfo$ = new EventEmitter();
+  countChat$ = new EventEmitter();
 
   constructor() { }
 }
