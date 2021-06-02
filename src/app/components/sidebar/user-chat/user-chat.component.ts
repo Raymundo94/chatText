@@ -6,16 +6,12 @@ import { DataService } from 'src/app/services/data.service';
   templateUrl: './user-chat.component.html',
   styleUrls: ['./user-chat.component.scss']
 })
-export class UserChatComponent implements OnInit {
+export class UserChatComponent {
 
   @Input() userInfo: any;
 
-
   constructor(private data: DataService) { }
-
-  ngOnInit(): void {
-  }
-
+  
   setChats():any{
     this.data.userId$.emit(this.userInfo.id);
   }

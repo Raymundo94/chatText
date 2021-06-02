@@ -5,11 +5,8 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './not-select.component.html',
   styleUrls: ['./not-select.component.scss']
 })
-export class NotSelectComponent implements OnInit {
-
+export class NotSelectComponent {
+  
   constructor() { }
-
-  ngOnInit(): void {
-  }
 
 }

@@ -6,14 +6,12 @@ import { DataService } from 'src/app/services/data.service';
   templateUrl: './read-message.component.html',
   styleUrls: ['./read-message.component.scss']
 })
-export class ReadMessageComponent implements OnInit {
+export class ReadMessageComponent {
 
   @Input() msj: any;
   userId: any;
   chats: any;
 
   constructor(private data: DataService) { }
-  ngOnInit(): void {
-  }
 
 }

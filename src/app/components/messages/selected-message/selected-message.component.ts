@@ -1,27 +1,23 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { DataService } from 'src/app/services/data.service';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-selected-message',
   templateUrl: './selected-message.component.html',
   styleUrls: ['./selected-message.component.scss']
 })
-export class SelectedMessageComponent implements OnInit {
+export class SelectedMessageComponent{
   messagesData: any;
   userInfo: any;
-
   @Input() set messages(value: any) {
     if (value) {
-      this.messagesData = value;
-      this.userInfo = value.find((u: any) => u.sendBy == 'me');
-      console.log(value);
+      let msj:any = value;
+      msj.forEach((element:any) => {
+        element.date = new Date(element.date);
+      });
+      const sortedActivities = msj.sort((a:any, b:any) => b.date - a.date)
+      console.log(sortedActivities);
+      this.messagesData = sortedActivities.reverse();
+      this.userInfo = msj.find((u: any) => u.sendBy == 'me');
     }
   }
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
-
 }

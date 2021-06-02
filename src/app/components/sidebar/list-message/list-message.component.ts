@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { DataService } from 'src/app/services/data.service';
 
@@ -7,7 +7,7 @@ import { DataService } from 'src/app/services/data.service';
   templateUrl: './list-message.component.html',
   styleUrls: ['./list-message.component.scss']
 })
-export class ListMessageComponent implements OnInit {
+export class ListMessageComponent implements OnInit, OnDestroy {
 
   private subscription = new Subscription();
   users: any;

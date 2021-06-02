@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { DataService } from '../services/data.service';
 import { InfoChatsService } from '../services/info-chats.service';
@@ -10,7 +10,7 @@ import { InfoChatsService } from '../services/info-chats.service';
   templateUrl: './root.component.html',
   styleUrls: ['./root.component.scss']
 })
-export class RootComponent {
+export class RootComponent implements OnInit, OnDestroy{
 
   private subscription = new Subscription();
   chatsInfo: any;
@@ -18,7 +18,7 @@ export class RootComponent {
   constructor(private chats: InfoChatsService, private data: DataService, private httpClient: HttpClient) {
   }
 
-  ngOnInit() {
+  ngOnInit():void {
     this.getChatsActive();
     this.getInfoChat();
   }
@@ -30,7 +30,6 @@ export class RootComponent {
       this.data.chatActive$.emit(resp);
       this.getCount();
     }, error => {
-      //put error in console for test
       console.log(error);
     });
     this.subscription.add(getActive);

@@ -6,13 +6,10 @@ import { DataService } from 'src/app/services/data.service';
   templateUrl: './header-message.component.html',
   styleUrls: ['./header-message.component.scss']
 })
-export class HeaderMessageComponent implements OnInit {
+export class HeaderMessageComponent {
   // name: any;
   @Input() userInfo: any;
 
   constructor(private data: DataService) { }
-
-  ngOnInit(): void {
-  }
 
 }
