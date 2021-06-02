@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-read-message',
@@ -7,8 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReadMessageComponent implements OnInit {
 
-  constructor() { }
+  @Input() msj: any;
+  userId: any;
+  chats: any;
 
+  constructor(private data: DataService) { }
   ngOnInit(): void {
   }
 

@@ -1,35 +1,15 @@
-<div class="message">
+<div class="message mb-4" *ngIf="msj.sendBy != 'me'" >
     <a class="avatar avatar-sm mr-4 mr-lg-5" href="#" data-chat-sidebar-toggle="#chat-2-info">
-        <img class="avatar-img" src="assets/images/avatars/10.jpg" alt="">
+        <img class="avatar-img" src="{{msj.img}}" alt="">
     </a>
     <div class="message-body">
         <div class="message-row">
             <div class="d-flex align-items-center">
                 <div class="message-content bg-light">
-                    <h6 class="mb-2">Anna Bridges</h6>
-                    <div>Yeah, I'm going to meet a friend of mine at the department store. I
-                        have to buy some presents for my parents.</div>
-
+                    <h6 class="mb-2">{{msj.nombre}}</h6>
+                    <div>{{msj.message}}</div>
                     <div class="mt-1">
-                        <small class="opacity-65">8 mins ago</small>
-                    </div>
-                </div>
-                <div class="dropdown">
-                    <a class="text-muted opacity-60 ml-3" href="#" data-toggle="dropdown" aria-haspopup="true"
-                        aria-expanded="false">
-                        <i class="fe-more-vertical"></i>
-                    </a>
-
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item d-flex align-items-center" href="#">
-                            Edit <span class="ml-auto fe-edit-3"></span>
-                        </a>
-                        <a class="dropdown-item d-flex align-items-center" href="#">
-                            Share <span class="ml-auto fe-share-2"></span>
-                        </a>
-                        <a class="dropdown-item d-flex align-items-center" href="#">
-                            Delete <span class="ml-auto fe-trash-2"></span>
-                        </a>
+                        <small class="opacity-65">{{msj.date | date:'h:mm a '}}</small>
                     </div>
                 </div>
             </div>
@@ -37,60 +17,17 @@
     </div>
 </div>
 
-<div class="message message-right">
+<div class="message message-right mb-4" *ngIf="msj.sendBy == 'me'">
     <div class="avatar avatar-sm ml-4 ml-lg-5 d-none d-lg-block">
-        <img class="avatar-img" src="assets/images/avatars/12.jpg" alt="">
+        <img class="avatar-img" src="{{msj.img}}" alt="">
     </div>
     <div class="message-body">
         <div class="message-row">
             <div class="d-flex align-items-center justify-content-end">
-                <div class="dropdown">
-                    <a class="text-muted opacity-60 mr-3" href="#" data-toggle="dropdown" aria-haspopup="true"
-                        aria-expanded="false">
-                        <i class="fe-more-vertical"></i>
-                    </a>
-
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item d-flex align-items-center" href="#">
-                            Edit <span class="ml-auto fe-edit-3"></span>
-                        </a>
-                        <a class="dropdown-item d-flex align-items-center" href="#">
-                            Share <span class="ml-auto fe-share-2"></span>
-                        </a>
-                        <a class="dropdown-item d-flex align-items-center" href="#">
-                            Delete <span class="ml-auto fe-trash-2"></span>
-                        </a>
-                    </div>
-                </div>
                 <div class="message-content bg-primary text-white">
-                    <div>Yeah, I'm going to meet a friend of mine at the department store. I
-                        have to buy some presents for my parents.</div>
-
+                    <div>{{msj.message}}</div>
                     <div class="mt-1">
-                        <small class="opacity-65">8 mins ago</small>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="message-row">
-            <div class="d-flex align-items-center justify-content-end">
-                <div class="dropdown">
-                    <a class="text-muted opacity-60 mr-3" href="#" data-toggle="dropdown" aria-haspopup="true"
-                        aria-expanded="false">
-                        <i class="fe-more-vertical"></i>
-                    </a>
-
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item d-flex align-items-center" href="#">
-                            Edit <span class="ml-auto fe-edit-3"></span>
-                        </a>
-                        <a class="dropdown-item d-flex align-items-center" href="#">
-                            Share <span class="ml-auto fe-share-2"></span>
-                        </a>
-                        <a class="dropdown-item d-flex align-items-center" href="#">
-                            Delete <span class="ml-auto fe-trash-2"></span>
-                        </a>
+                        <small class="opacity-65">{{msj.date | date:'h:mm a '}}</small>
                     </div>
                 </div>
             </div>

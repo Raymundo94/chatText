@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-header-message',
@@ -6,8 +7,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header-message.component.scss']
 })
 export class HeaderMessageComponent implements OnInit {
+  // name: any;
+  @Input() userInfo: any;
 
-  constructor() { }
+  constructor(private data: DataService) { }
 
   ngOnInit(): void {
   }

@@ -8,6 +8,8 @@ export class DataService {
   chatActive$ = new EventEmitter();
   chatInfo$ = new EventEmitter();
   countChat$ = new EventEmitter();
+  userId$ = new EventEmitter();
+  messages$ = new EventEmitter();
 
   constructor() { }
 }

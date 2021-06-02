@@ -39,9 +39,6 @@ export class ListMessageComponent implements OnInit {
             }
           });
       });
-      console.log("**********************");
-      console.log(this.users);
-
     }, error => {
       console.log(error);
     })

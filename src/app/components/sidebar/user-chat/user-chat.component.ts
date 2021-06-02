@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-user-chat',
@@ -10,9 +11,13 @@ export class UserChatComponent implements OnInit {
   @Input() userInfo: any;
 
 
-  constructor() { }
+  constructor(private data: DataService) { }
 
   ngOnInit(): void {
+  }
+
+  setChats():any{
+    this.data.userId$.emit(this.userInfo.id);
   }
 
 }
