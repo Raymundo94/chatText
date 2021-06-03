@@ -10,6 +10,7 @@ import { DataService } from 'src/app/services/data.service';
 export class ReadMessageComponent {
 
   @Input() msj: any;
+  @Input() userMe: any;
   userId: any;
   chats: any;
 

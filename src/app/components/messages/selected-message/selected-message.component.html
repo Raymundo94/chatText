@@ -2,9 +2,9 @@
     <div id="chat-2" class="chat dropzone-form-js">
         <div class="chat-body">
             <app-header-message [userInfo]="userInfo"></app-header-message>
-            <div class="chat-content px-lg-8">
+            <div class="chat-content px-lg-8" #messagesContainerRef>
                 <div class="container-xxl py-6 py-lg-10">
-                    <app-read-message *ngFor="let msj of messagesData" [msj]="msj"></app-read-message>
+                    <app-read-message *ngFor="let msj of messagesData" [msj]="msj" [userMe]="userMe"></app-read-message>
                 </div>
                 <div class="end-of-chat"></div>
             </div>

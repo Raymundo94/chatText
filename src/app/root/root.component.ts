@@ -26,7 +26,6 @@ export class RootComponent implements OnInit, OnDestroy{
 
   //Get chats active
   getChatsActive(): void {
-    this.spinner.show();
     const getActive = this.chats.getUsersChat().subscribe(resp => {
       this.chatsInfo = resp;
       this.data.chatActive$.emit(resp);
@@ -45,7 +44,7 @@ export class RootComponent implements OnInit, OnDestroy{
       const getMessages = this.chats.getChats(id).subscribe(chats => {
         chats.forEach((element: any) => {
           if (element.sendBy == 'me') {
-            element.img = usr.profile;
+            element.img = '/assets/images/avatars/12.jpg';
             element.nombre = usr.name;
           } else {
             let usr2 = this.chatsInfo.find((u: any) => u.id === element.sendBy);
@@ -81,7 +80,6 @@ export class RootComponent implements OnInit, OnDestroy{
   getNumberInfo(): void {
     const getCount = this.chats.getCountMessage().subscribe(resp => {
       this.data.countChat$.emit(resp);
-      this.spinner.hide();
       getCount.unsubscribe();
     }, error => {
       console.log(error);
