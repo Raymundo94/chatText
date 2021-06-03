@@ -1,5 +1,5 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { Subscription } from 'rxjs';
 import { DataService } from '../services/data.service';
 import { InfoChatsService } from '../services/info-chats.service';
@@ -14,7 +14,9 @@ export class RootComponent implements OnInit, OnDestroy{
   private subscription = new Subscription();
   chatsInfo: any;
 
-  constructor(private chats: InfoChatsService, private data: DataService, private httpClient: HttpClient) {
+  constructor(private chats: InfoChatsService, private data: DataService,
+    private spinner: NgxSpinnerService
+    ) {
   }
 
   ngOnInit():void {
@@ -24,6 +26,7 @@ export class RootComponent implements OnInit, OnDestroy{
 
   //Get chats active
   getChatsActive(): void {
+    this.spinner.show();
     const getActive = this.chats.getUsersChat().subscribe(resp => {
       this.chatsInfo = resp;
       this.data.chatActive$.emit(resp);
@@ -51,6 +54,7 @@ export class RootComponent implements OnInit, OnDestroy{
           }
         });
         this.data.messages$.emit(chats);
+        this.spinner.hide();
         getMessages.unsubscribe()
       }, error => {
         console.log(error);
@@ -69,7 +73,7 @@ export class RootComponent implements OnInit, OnDestroy{
   getCount(): void {
     this.getNumberInfo();
     setTimeout(() => {
-      this.getNumberInfo();
+      this.getChatsActive()
     }, 60000);
   }
 
@@ -77,6 +81,7 @@ export class RootComponent implements OnInit, OnDestroy{
   getNumberInfo(): void {
     const getCount = this.chats.getCountMessage().subscribe(resp => {
       this.data.countChat$.emit(resp);
+      this.spinner.hide();
       getCount.unsubscribe();
     }, error => {
       console.log(error);

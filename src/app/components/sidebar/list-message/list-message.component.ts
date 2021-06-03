@@ -26,7 +26,7 @@ export class ListMessageComponent implements OnInit, OnDestroy {
       msj.forEach((element: any) => {
         element.lastMessage = new Date(element.lastMessage);
       });
-      this.serviceMessage = msj.sort((a: any, b: any) => (b.lastMessage - a.lastMessage))
+      this.serviceMessage = msj.sort((a: any, b: any) => (b.lastMessage - a.lastMessage)).reverse();
       this.getCountMessage();
     }, error => {
       console.log(error);
@@ -36,7 +36,6 @@ export class ListMessageComponent implements OnInit, OnDestroy {
   //get number of messages
   getCountMessage(): void {
     const countChats = this.data.countChat$.subscribe(resp => {
-      console.log(resp);
       this.count = resp;
       this.count.forEach((count: any) => {
         this.serviceMessage.forEach((user: any) => {

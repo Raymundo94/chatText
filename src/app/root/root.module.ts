@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RootRoutingModule } from './root-routing.module';
 import { RootComponent } from './root.component';
@@ -10,6 +10,8 @@ import { ReadMessageComponent } from '../components/messages/read-message/read-m
 import { HeaderMessageComponent } from '../components/messages/header-message/header-message.component';
 import { UserChatComponent } from '../components/sidebar/user-chat/user-chat.component';
 import { ListMessageComponent } from '../components/sidebar/list-message/list-message.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -21,11 +23,14 @@ import { ListMessageComponent } from '../components/sidebar/list-message/list-me
     SelectedMessageComponent,
     UserChatComponent,
     ReadMessageComponent,
-    HeaderMessageComponent
+    HeaderMessageComponent,
   ],
   imports: [
     CommonModule,
-    RootRoutingModule
-  ]
+    RootRoutingModule,
+    NgxSpinnerModule,
+    FormsModule
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class RootModule { }

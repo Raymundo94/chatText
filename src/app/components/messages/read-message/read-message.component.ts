@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { DataService } from 'src/app/services/data.service';
 
 @Component({
@@ -12,6 +13,8 @@ export class ReadMessageComponent {
   userId: any;
   chats: any;
 
-  constructor(private data: DataService) { }
+  constructor() {
+  }
+
 
 }

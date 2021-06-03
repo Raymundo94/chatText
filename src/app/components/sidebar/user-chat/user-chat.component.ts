@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { DataService } from 'src/app/services/data.service';
 
 @Component({
@@ -10,9 +11,10 @@ export class UserChatComponent {
 
   @Input() userInfo: any;
 
-  constructor(private data: DataService) { }
+  constructor(private data: DataService,  private spinner: NgxSpinnerService) { }
   
   setChats():any{
+    this.spinner.show();
     this.data.userId$.emit(this.userInfo.id);
   }
 
