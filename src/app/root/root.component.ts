@@ -4,7 +4,6 @@ import { Subscription } from 'rxjs';
 import { DataService } from '../services/data.service';
 import { InfoChatsService } from '../services/info-chats.service';
 
-
 @Component({
   selector: 'app-root',
   templateUrl: './root.component.html',

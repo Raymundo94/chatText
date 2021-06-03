@@ -12,6 +12,7 @@ export class ListMessageComponent implements OnInit, OnDestroy {
   private subscription = new Subscription();
   users: any;
   count: any;
+  serviceMessage: any;
 
   constructor(private data: DataService) { }
 
@@ -19,9 +20,13 @@ export class ListMessageComponent implements OnInit, OnDestroy {
     this.getChatActive();
   }
   //Get chat active
-  getChatActive():void {
+  getChatActive(): void {
     const activeChats = this.data.chatActive$.subscribe(resp => {
-      this.users = resp;
+      let msj: any = resp;
+      msj.forEach((element: any) => {
+        element.lastMessage = new Date(element.lastMessage);
+      });
+      this.serviceMessage = msj.sort((a: any, b: any) => (b.lastMessage - a.lastMessage))
       this.getCountMessage();
     }, error => {
       console.log(error);
@@ -29,23 +34,25 @@ export class ListMessageComponent implements OnInit, OnDestroy {
     this.subscription.add(activeChats);
   }
   //get number of messages
-  getCountMessage():void {
+  getCountMessage(): void {
     const countChats = this.data.countChat$.subscribe(resp => {
+      console.log(resp);
       this.count = resp;
-      this.count.forEach((count:any) => {
-          this.users.forEach((user:any) => {
-            if(count.userId === user.id ){
-              user.count = count.totalUnread
-            }
-          });
+      this.count.forEach((count: any) => {
+        this.serviceMessage.forEach((user: any) => {
+          if (count.userId === user.id) {
+            user.count = count.totalUnread
+          }
+        });
       });
+      //order messages
+      this.serviceMessage.sort((a:any) => a.count).reverse();
+      this.users = this.serviceMessage;
     }, error => {
       console.log(error);
     })
     this.subscription.add(countChats);
   }
-
-
 
   //Close all
   ngOnDestroy(): void {
