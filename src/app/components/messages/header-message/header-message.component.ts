@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-header-message',
@@ -10,6 +9,6 @@ export class HeaderMessageComponent {
   // name: any;
   @Input() userInfo: any;
 
-  constructor(private data: DataService) { }
+  constructor() { }
 
 }

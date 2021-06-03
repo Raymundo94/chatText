@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { NgxSpinnerService } from 'ngx-spinner';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { DataService } from 'src/app/services/data.service';
 
 @Component({
@@ -7,20 +7,26 @@ import { DataService } from 'src/app/services/data.service';
   templateUrl: './messages.component.html',
   styleUrls: ['./messages.component.scss']
 })
-export class MessagesComponent implements OnInit {
+export class MessagesComponent implements OnInit, OnDestroy {
 
   selected: boolean = false;
   messages: any;
-  constructor(private data: DataService,  private spinner: NgxSpinnerService) { }
+  private subscription = new Subscription();
 
+  constructor(private data: DataService) { }
+
+  //Add subscription
   ngOnInit(): void {
-    this.data.messages$.subscribe(resp => {
-      this.spinner.show();
+    const message = this.data.messages$.subscribe(resp => {
       this.messages = resp;
       this.selected = true;
-      this.spinner.hide();
-
     })
+    this.subscription.add(message);
+  }
+
+  //finish subscription
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
 }

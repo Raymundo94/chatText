@@ -61,13 +61,6 @@ export class RootComponent implements OnInit, OnDestroy{
     })
     this.subscription.add(userId);
   }
-
-  //Close all
-  ngOnDestroy(): void {
-    //delete subscriptions
-    this.subscription.unsubscribe();
-  }
-
   //get number of messages
   getCount(): void {
     this.getNumberInfo();
@@ -85,4 +78,10 @@ export class RootComponent implements OnInit, OnDestroy{
       console.log(error);
     })
   }
+    //Close all
+    ngOnDestroy(): void {
+      //delete subscriptions
+      this.subscription.unsubscribe();
+    }
+  
 }

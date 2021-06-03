@@ -13,7 +13,7 @@ export class UserChatComponent {
 
   constructor(private data: DataService,  private spinner: NgxSpinnerService) { }
   
-  setChats():any{
+  setChats():void{
     this.spinner.show();
     this.data.userId$.emit(this.userInfo.id);
   }
