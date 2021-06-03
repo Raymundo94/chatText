@@ -12,6 +12,7 @@ import { UserChatComponent } from '../components/sidebar/user-chat/user-chat.com
 import { ListMessageComponent } from '../components/sidebar/list-message/list-message.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { FormsModule } from '@angular/forms';
+import { MsjPipe } from '../pipes/msj.pipe';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { FormsModule } from '@angular/forms';
     UserChatComponent,
     ReadMessageComponent,
     HeaderMessageComponent,
+    MsjPipe
   ],
   imports: [
     CommonModule,

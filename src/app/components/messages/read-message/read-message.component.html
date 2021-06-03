@@ -8,7 +8,7 @@
             <div class="d-flex align-items-center">
                 <div class="message-content bg-light">
                     <h6 class="mb-2">{{msj.nombre}}</h6>
-                    <div>{{msj.message}}</div>
+                    <div [innerHTML]="msj.message | msj"></div>
                     <div class="mt-1">
                         <small class="opacity-65">{{msj.date | date:'h:mm a '}}</small>
                     </div>
@@ -26,7 +26,7 @@
         <div class="message-row">
             <div class="d-flex align-items-center justify-content-end">
                 <div class="message-content bg-primary text-white">
-                    <div>{{msj.message}}</div>
+                    <div  [innerHTML]="msj.message | msj"></div>
                     <div class="mt-1">
                         <small class="opacity-65">{{msj.date | date:'h:mm a '}}</small>
                     </div>

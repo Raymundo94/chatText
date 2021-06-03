@@ -1,22 +1,18 @@
-import { Component, ElementRef, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input } from '@angular/core';
 
 @Component({
   selector: 'app-selected-message',
   templateUrl: './selected-message.component.html',
   styleUrls: ['./selected-message.component.scss']
 })
-export class SelectedMessageComponent implements OnInit{
+export class SelectedMessageComponent {
   messagesData: any;
   userInfo: any;
   userMe: any;
   message:any;
-  // @ViewChild('messagesContainerRef')
   messagesContainerRef!: ElementRef;
 
   constructor(){
-  }
-  ngOnInit(): void {
-    // this.messagesContainerRef.nativeElement.scrollTop = this.messagesContainerRef.nativeElement.scrollHeight;
   }
 
   // chat-content
@@ -30,8 +26,6 @@ export class SelectedMessageComponent implements OnInit{
       this.messagesData = sortedActivities.reverse();
       this.userInfo = msj.find((u: any) => u.sendBy !== 'me');
       this.userMe = msj.find((u: any) => u.sendBy === 'me');
-
-      console.log(this.messagesData);
     } 
   }
 
