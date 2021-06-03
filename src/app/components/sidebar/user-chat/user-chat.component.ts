@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { Users } from 'src/app/models/users';
 import { DataService } from 'src/app/services/data.service';
 
 @Component({
@@ -9,14 +10,14 @@ import { DataService } from 'src/app/services/data.service';
 })
 export class UserChatComponent {
 
-  @Input() userInfo: any;
+  @Input() userInfo!: Users;
 
   constructor(private data: DataService,  private spinner: NgxSpinnerService) { }
   
   setChats():void{
     this.spinner.show();
     if( this.userInfo.count){
-      this.userInfo.count = null;
+      this.userInfo.count = undefined;
     }
     this.data.userId$.emit(this.userInfo.id);
   }

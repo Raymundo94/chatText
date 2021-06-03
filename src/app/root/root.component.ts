@@ -1,6 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Subscription } from 'rxjs';
+import { Chats } from '../models/chats';
+import { CountChats } from '../models/count-chats';
+import { Users } from '../models/users';
 import { DataService } from '../services/data.service';
 import { InfoChatsService } from '../services/info-chats.service';
 
@@ -9,26 +12,26 @@ import { InfoChatsService } from '../services/info-chats.service';
   templateUrl: './root.component.html',
   styleUrls: ['./root.component.scss']
 })
-export class RootComponent implements OnInit, OnDestroy{
+export class RootComponent implements OnInit, OnDestroy {
 
   private subscription = new Subscription();
-  chatsInfo: any;
+  chatsInfo: Users[] = [];
 
   constructor(private chats: InfoChatsService, private data: DataService,
     private spinner: NgxSpinnerService
-    ) {
+  ) {
   }
 
-  ngOnInit():void {
+  ngOnInit(): void {
     this.getChatsActive();
     this.getInfoChat();
   }
 
   //Get chats active
   getChatsActive(): void {
-    const getActive = this.chats.getUsersChat().subscribe(resp => {
-      this.chatsInfo = resp;
-      this.data.chatActive$.emit(resp);
+    const getActive = this.chats.getUsersChat().subscribe((users: Users[]) => {
+      this.chatsInfo = users;
+      this.data.chatActive$.emit(users);
       this.getCount();
     }, error => {
       console.log(error);
@@ -40,23 +43,22 @@ export class RootComponent implements OnInit, OnDestroy{
   getInfoChat(): void {
     const userId = this.data.userId$.subscribe((id: string) => {
       let usr = this.chatsInfo.find((u: any) => u.id === id);
-      let user = { name: usr.name, img: usr.profile }
-      const getMessages = this.chats.getChats(id).subscribe(chats => {
+      const getMessages = this.chats.getChats(id).subscribe((chats:Chats[]) => {
         chats.forEach((element: any) => {
           if (element.sendBy == 'me') {
             element.img = '/assets/images/avatars/12.jpg';
-            element.nombre = usr.name;
+            element.nombre = usr!.name;
           } else {
             let usr2 = this.chatsInfo.find((u: any) => u.id === element.sendBy);
-            element.img = usr2.profile;
-            element.nombre = usr.name;
+            element.img = usr2!.profile;
+            element.nombre = usr!.name;
           }
         });
         this.data.messages$.emit(chats);
         this.spinner.hide();
         getMessages.unsubscribe()
-      }, error => {
-        console.log(error);
+      }, _error => {
+        //Add modals of error
       });
     })
     this.subscription.add(userId);
@@ -71,17 +73,18 @@ export class RootComponent implements OnInit, OnDestroy{
 
   //get service count messages
   getNumberInfo(): void {
-    const getCount = this.chats.getCountMessage().subscribe(resp => {
-      this.data.countChat$.emit(resp);
+    const getCount = this.chats.getCountMessage().subscribe((count: CountChats[]) => {
+      this.data.countChat$.emit(count);
       getCount.unsubscribe();
     }, error => {
+      //Add modals of error
       console.log(error);
     })
   }
-    //Close all
-    ngOnDestroy(): void {
-      //delete subscriptions
-      this.subscription.unsubscribe();
-    }
-  
+  //Close all
+  ngOnDestroy(): void {
+    //delete subscriptions
+    this.subscription.unsubscribe();
+  }
+
 }

@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Chats } from 'src/app/models/chats';
 
 @Component({
   selector: 'app-header-message',
@@ -6,9 +7,8 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./header-message.component.scss']
 })
 export class HeaderMessageComponent {
-  // name: any;
-  @Input() userInfo: any;
+  @Input() userInfo!: Chats;
 
-  constructor() { }
+  constructor() {}
 
 }

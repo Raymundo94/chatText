@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { Chats } from 'src/app/models/chats';
 import { DataService } from 'src/app/services/data.service';
 
 @Component({
@@ -10,9 +11,9 @@ import { DataService } from 'src/app/services/data.service';
 export class ListMessageComponent implements OnInit, OnDestroy {
 
   private subscription = new Subscription();
-  users: any;
+  users!: any[];
   count: any;
-  serviceMessage: any;
+  serviceMessage!: Chats[];
 
   constructor(private data: DataService) { }
 
@@ -35,7 +36,7 @@ export class ListMessageComponent implements OnInit, OnDestroy {
   }
   //get number of messages
   getCountMessage(): void {
-    const countChats = this.data.countChat$.subscribe(resp => {
+    const countChats = this.data.countChat$.subscribe((resp) => {
       this.count = resp;
       this.count.forEach((count: any) => {
         this.serviceMessage.forEach((user: any) => {

@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { DataService } from 'src/app/services/data.service';
+import { Chats } from 'src/app/models/chats';
 
 @Component({
   selector: 'app-read-message',
@@ -9,13 +9,9 @@ import { DataService } from 'src/app/services/data.service';
 })
 export class ReadMessageComponent {
 
-  @Input() msj: any;
+  @Input() msj!: Chats;
   @Input() userMe: any;
-  userId: any;
-  chats: any;
 
-  constructor() {
-  }
-
-
+  constructor() {}
+  
 }

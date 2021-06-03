@@ -1,4 +1,5 @@
 import { Component, ElementRef, Input } from '@angular/core';
+import { Chats } from 'src/app/models/chats';
 
 @Component({
   selector: 'app-selected-message',
@@ -6,11 +7,11 @@ import { Component, ElementRef, Input } from '@angular/core';
   styleUrls: ['./selected-message.component.scss']
 })
 export class SelectedMessageComponent {
-  messagesData: any;
+  messagesData: Chats[] = [];
+  messagesContainerRef!: ElementRef;
+  message!:string;
   userInfo: any;
   userMe: any;
-  message:any;
-  messagesContainerRef!: ElementRef;
 
   constructor(){
   }
@@ -18,7 +19,7 @@ export class SelectedMessageComponent {
   // chat-content
   @Input() set messages(value: any) {
     if (value) {
-      let msj:any = value;
+      let msj:Chats[] = value;
       msj.forEach((element:any) => {
         element.date = new Date(element.date);
       });
