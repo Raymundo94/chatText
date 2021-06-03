@@ -15,6 +15,9 @@ export class UserChatComponent {
   
   setChats():void{
     this.spinner.show();
+    if( this.userInfo.count){
+      this.userInfo.count = null;
+    }
     this.data.userId$.emit(this.userInfo.id);
   }
 
